@@ -1,3 +1,5 @@
-# Heroku node.js Hello World
+# An authentication endpoint for TokBox using Node.js
 
-Based on https://devcenter.heroku.com/articles/nodejs
+This endpoint **does not** actually do any authentication against an auth system. It simply allows the auth request e.g. fetches a session or a token.
+
+**Please** ensure that if you use this in production you do some real authentication against the request.
