@@ -18,26 +18,22 @@ app.use( allowCrossDomain );
 
 app.post('/get_session', function(request, response) {
 
-	var user = request.body.user;
+  // Add some form of authentication here
 
-	console.log( 'recieved user %s', JSON.stringify( user ) );
-
-	var sessionId = '';
 	opentok.createSession(allowedHost, function(result){
-
 		response.json( { sessionId: result } );
-
-  	console.log( 'sent response' );
 	});
 
 });
 
 app.post( '/get_token', function( request, response ) {
-
-  console.log( request.body );
   
   var sessionId = request.body.sessionId;
+
+  // In this example a user JSON object is sent
   var user = request.body.user;
+
+  // Add some form of authentication here
 
   if( !sessionId ) {
     response.send( 400 );
@@ -47,7 +43,7 @@ app.post( '/get_token', function( request, response ) {
     var token = opentok.generateToken( {
       session_id: sessionId, 
       role: OpenTok.RoleConstants.PUBLISHER, 
-      connection_data: user.id
+      connection_data: user.id // additional data can be set here
     });
 
     response.json( {
